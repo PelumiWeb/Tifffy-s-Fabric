@@ -1,16 +1,17 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { PRODUCTS } from '@/lib/products';
+import { createClient } from '@/lib/supabase/server';
+import { dbToProduct } from '@/lib/products';
 import ProductDetail from '@/components/ProductDetail';
 
-export async function generateStaticParams() {
-  return PRODUCTS.map(p => ({ productId: p.id }));
-}
+export const revalidate = 0;
 
 export default async function ProductPage({ params }: { params: Promise<{ productId: string }> }) {
   const { productId } = await params;
-  const product = PRODUCTS.find(p => p.id === productId);
-  if (!product) notFound();
+  const supabase = await createClient();
+  const { data } = await supabase.from('products').select('*').eq('id', productId).single();
+  if (!data) notFound();
+  const product = dbToProduct(data);
 
   return (
     <section style={{ padding: '32px' }}>

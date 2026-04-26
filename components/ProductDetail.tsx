@@ -30,6 +30,7 @@ export default function ProductDetail({ product }: { product: Product }) {
   const [size, setSize] = useState('S');
   const [color, setColor] = useState(COLORS[0]);
   const { addToCart, openCart } = useCart();
+  const hasImages = product.image_urls && product.image_urls.length > 0;
   const phs = [product.ph, 'ph-sand', 'ph-ink', 'ph-cream'];
   const colors = COLORS.slice(0, product.colors);
 
@@ -42,9 +43,14 @@ export default function ProductDetail({ product }: { product: Product }) {
     <div style={{ display: 'grid', gridTemplateColumns: '1.3fr 1fr', gap: 64, alignItems: 'flex-start' }}>
       {/* Gallery */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-        {phs.map((p, i) => (
-          <div key={i} className={'ph ' + p} style={{ aspectRatio: '4 / 5' }} />
-        ))}
+        {hasImages
+          ? product.image_urls!.slice(0, 4).map((url, i) => (
+              <img key={i} src={url} alt={product.name} style={{ aspectRatio: '4 / 5', width: '100%', objectFit: 'cover' }} />
+            ))
+          : phs.map((p, i) => (
+              <div key={i} className={'ph ' + p} style={{ aspectRatio: '4 / 5' }} />
+            ))
+        }
       </div>
 
       {/* Details */}

@@ -14,8 +14,19 @@ export default function ProductCard({ product }: { product: Product }) {
       onMouseLeave={() => setHover(false)}
     >
       <div style={{ position: 'relative', aspectRatio: '4 / 5', overflow: 'hidden' }}>
-        <div className={'ph ' + product.ph} style={{ position: 'absolute', inset: 0, transition: 'opacity 400ms var(--ease)', opacity: hover ? 0 : 1 }} />
-        <div className={'ph ' + altPh} style={{ position: 'absolute', inset: 0, transition: 'opacity 400ms var(--ease)', opacity: hover ? 1 : 0 }} />
+        {product.image_urls && product.image_urls.length > 0 ? (
+          <>
+            <img src={product.image_urls[0]} alt={product.name} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transition: 'opacity 400ms var(--ease)', opacity: hover && product.image_urls.length > 1 ? 0 : 1 }} />
+            {product.image_urls[1] && (
+              <img src={product.image_urls[1]} alt={product.name} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transition: 'opacity 400ms var(--ease)', opacity: hover ? 1 : 0 }} />
+            )}
+          </>
+        ) : (
+          <>
+            <div className={'ph ' + product.ph} style={{ position: 'absolute', inset: 0, transition: 'opacity 400ms var(--ease)', opacity: hover ? 0 : 1 }} />
+            <div className={'ph ' + altPh} style={{ position: 'absolute', inset: 0, transition: 'opacity 400ms var(--ease)', opacity: hover ? 1 : 0 }} />
+          </>
+        )}
         {product.tag && (
           <span style={{ position: 'absolute', top: 14, left: 14, fontSize: 10, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--bone)', background: product.tag === 'Sale' ? 'var(--rouge)' : 'var(--ink)', padding: '4px 8px' }}>
             {product.tag}

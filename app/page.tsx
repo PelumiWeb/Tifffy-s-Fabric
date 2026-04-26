@@ -1,12 +1,19 @@
 import Hero from '@/components/Hero';
 import EditRow from '@/components/EditRow';
-import { PRODUCTS } from '@/lib/products';
+import { createClient } from '@/lib/supabase/server';
+import { dbToProduct } from '@/lib/products';
 
-export default function HomePage() {
+export const revalidate = 0;
+
+export default async function HomePage() {
+  const supabase = await createClient();
+  const { data } = await supabase.from('products').select('*').order('created_at', { ascending: false });
+  const products = (data ?? []).map(dbToProduct);
+
   return (
     <>
       <Hero />
-      <EditRow eyebrow="New this week" title="The Slip Edit" products={PRODUCTS.slice(0, 3)} />
+      <EditRow eyebrow="New this week" title="The Slip Edit" products={products.slice(0, 3)} />
       <section style={{ position: 'relative', height: 520, margin: '0 32px', overflow: 'hidden' }}>
         <div className="ph ph-olive" style={{ position: 'absolute', inset: 0 }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(26,22,20,0.55), transparent 55%)' }} />
@@ -16,7 +23,7 @@ export default function HomePage() {
           <button className="btn btn--secondary" style={{ borderColor: 'var(--bone)', color: 'var(--bone)', marginTop: 28 }}>View Lookbook</button>
         </div>
       </section>
-      <EditRow eyebrow="Back in stock" title="The classics, returning" products={PRODUCTS.slice(3, 6)} />
+      <EditRow eyebrow="Back in stock" title="The classics, returning" products={products.slice(3, 6)} />
     </>
   );
 }
