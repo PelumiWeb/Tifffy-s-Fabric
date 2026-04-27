@@ -40,7 +40,7 @@ export default function ProductDetail({ product }: { product: Product }) {
   };
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1.3fr 1fr', gap: 64, alignItems: 'flex-start' }}>
+    <div className="detail-grid">
       {/* Gallery */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
         {hasImages
@@ -54,10 +54,10 @@ export default function ProductDetail({ product }: { product: Product }) {
       </div>
 
       {/* Details */}
-      <div style={{ position: 'sticky', top: 140, paddingTop: 8, display: 'flex', flexDirection: 'column', gap: 28 }}>
+      <div className="detail-sticky" style={{ position: 'sticky', top: 140, paddingTop: 8, display: 'flex', flexDirection: 'column', gap: 28 }}>
         <div>
           <div style={{ fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--fg-2)', marginBottom: 12, fontWeight: 500 }}>The Slip Edit</div>
-          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 40, lineHeight: 1.05, margin: 0, fontWeight: 400 }}>{product.name}</h1>
+          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(28px, 4vw, 40px)', lineHeight: 1.05, margin: 0, fontWeight: 400 }}>{product.name}</h1>
           <div style={{ display: 'flex', gap: 12, marginTop: 16, fontSize: 17, fontVariantNumeric: 'tabular-nums' }}>
             {product.salePrice ? (
               <>
@@ -92,7 +92,7 @@ export default function ProductDetail({ product }: { product: Product }) {
             <span style={{ fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--fg-2)', fontWeight: 500 }}>Size</span>
             <a style={{ fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--fg-2)', cursor: 'pointer', borderBottom: '1px solid var(--line)' }}>Find your fit</a>
           </div>
-          <div style={{ display: 'flex', gap: 8 }}>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             {SIZES.map(s => {
               const isOos = OOS.includes(s);
               const sel = size === s;

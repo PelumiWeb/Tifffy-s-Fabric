@@ -1,13 +1,13 @@
 export default function Footer() {
   const cols = [
-    { title: 'Shop',    items: ['New Arrivals', 'Dresses', 'Sets', 'Accessories', 'Sale'] },
-    { title: 'Help',    items: ['Shipping', 'Returns', 'Size Guide', 'Contact', 'FAQ'] },
+    { title: 'Shop',  items: ['New Arrivals', 'Dresses', 'Sets', 'Accessories', 'Sale'] },
+    { title: 'Help',  items: ['Shipping', 'Returns', 'Size Guide', 'Contact', 'FAQ'] },
     { title: 'About', items: ['Our Story', 'Lookbook', 'Journal', 'Careers'] },
   ];
 
   return (
     <footer style={{ background: 'var(--ink)', color: 'var(--bone)', padding: '80px 32px 32px', marginTop: 96 }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr', gap: 48, maxWidth: 1440, margin: '0 auto' }}>
+      <div className="footer-grid">
         <div>
           <div style={{ fontFamily: 'var(--font-serif)', fontSize: 24, letterSpacing: '0.28em', marginBottom: 24 }}>TIFFY'S FABRICS</div>
           <div style={{ fontSize: 13, lineHeight: 1.6, opacity: 0.72, marginBottom: 24, maxWidth: 360 }}>
@@ -34,7 +34,7 @@ export default function Footer() {
           </div>
         ))}
       </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 64, paddingTop: 24, borderTop: '1px solid rgba(245,240,232,0.14)', fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', opacity: 0.6, maxWidth: 1440, margin: '64px auto 0' }}>
+      <div className="footer-bottom" style={{ marginTop: 64, paddingTop: 24, borderTop: '1px solid rgba(245,240,232,0.14)', fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', opacity: 0.6, maxWidth: 1440, margin: '64px auto 0' }}>
         <span>© 2026 Tiffy's Fabrics</span>
         <div style={{ display: 'flex', gap: 20 }}>
           <a style={{ cursor: 'pointer' }}>Instagram</a>

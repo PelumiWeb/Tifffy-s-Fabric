@@ -14,7 +14,7 @@ export default async function ProductPage({ params }: { params: Promise<{ produc
   const product = dbToProduct(data);
 
   return (
-    <section style={{ padding: '32px' }}>
+    <section className="product-page" style={{ padding: '32px' }}>
       <div style={{ fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--fg-2)', marginBottom: 24 }}>
         <Link href="/shop" style={{ cursor: 'pointer', color: 'var(--fg-2)' }}>Dresses</Link>
         {' / '}

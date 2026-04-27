@@ -3,7 +3,7 @@ import ProductCard from './ProductCard';
 
 export default function ProductGrid({ products }: { products: Product[] }) {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+    <div className="product-grid">
       {products.map(p => <ProductCard key={p.id} product={p} />)}
     </div>
   );

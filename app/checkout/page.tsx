@@ -32,11 +32,11 @@ export default function CheckoutPage() {
   if (items.length === 0) return null;
 
   return (
-    <div style={{ minHeight: '100vh', display: 'grid', gridTemplateColumns: '1.3fr 1fr' }}>
+    <div className="checkout-grid">
       {/* Form side */}
-      <div style={{ padding: '48px 64px', maxWidth: 640, justifySelf: 'end', width: '100%' }}>
+      <div className="checkout-form" style={{ padding: '48px 64px', maxWidth: 640, justifySelf: 'end', width: '100%' }}>
         <button onClick={() => router.back()} style={{ background: 'transparent', border: 0, padding: 0, fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--fg-2)', marginBottom: 32, cursor: 'pointer' }}>← Back to shopping</button>
-        <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 36, lineHeight: 1.1, margin: '0 0 32px', fontWeight: 400 }}>Checkout</h2>
+        <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(28px, 4vw, 36px)', lineHeight: 1.1, margin: '0 0 32px', fontWeight: 400 }}>Checkout</h2>
 
         <div style={{ marginBottom: 40 }}>
           <div style={{ fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--fg-2)', marginBottom: 16, fontWeight: 500 }}>01 — Contact</div>
@@ -72,9 +72,9 @@ export default function CheckoutPage() {
 
         <div style={{ marginBottom: 40 }}>
           <div style={{ fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--fg-2)', marginBottom: 16, fontWeight: 500 }}>03 — Payment</div>
-          <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
+          <div style={{ display: 'flex', gap: 8, marginBottom: 12, flexWrap: 'wrap' }}>
             {['Card', 'Shop Pay', 'Apple Pay', 'PayPal'].map((m, i) => (
-              <div key={m} style={{ flex: 1, padding: '12px', textAlign: 'center', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 500, border: '1px solid ' + (i === 0 ? 'var(--ink)' : 'var(--line)'), background: i === 0 ? 'var(--cream)' : 'transparent', cursor: 'pointer' }}>{m}</div>
+              <div key={m} style={{ flex: 1, minWidth: 70, padding: '12px', textAlign: 'center', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 500, border: '1px solid ' + (i === 0 ? 'var(--ink)' : 'var(--line)'), background: i === 0 ? 'var(--cream)' : 'transparent', cursor: 'pointer' }}>{m}</div>
             ))}
           </div>
           <input className="field__input" placeholder="Card number" style={{ fontFamily: 'var(--font-mono)', marginBottom: 12 }} />
@@ -88,7 +88,7 @@ export default function CheckoutPage() {
       </div>
 
       {/* Order summary side */}
-      <aside style={{ background: 'var(--cream)', padding: '48px 64px' }}>
+      <aside className="checkout-summary" style={{ background: 'var(--cream)', padding: '48px 64px' }}>
         <div style={{ fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--fg-2)', marginBottom: 24, fontWeight: 500 }}>Order Summary</div>
         {items.map(item => (
           <div key={item.id + item.size + item.color} style={{ display: 'grid', gridTemplateColumns: '72px 1fr auto', gap: 14, alignItems: 'center', padding: '16px 0', borderBottom: '1px solid var(--line-soft)' }}>
