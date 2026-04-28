@@ -1,6 +1,11 @@
+import { redirect } from 'next/navigation';
+import { createClient } from '@/lib/supabase/server';
 import ProductForm from '../ProductForm';
 
-export default function NewProductPage() {
+export default async function NewProductPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) redirect('/admin/login');
   return (
     <div>
       <div style={{ marginBottom: 28 }}>
